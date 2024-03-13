@@ -2,19 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Ask_Data } from "../mock/Data";
 
 const initialState = {
-  data: Ask_Data,
+  askData: Ask_Data,
+  singelData: null
 };
 
 const questionSlice = createSlice({
   name: "questionSlicer",
   initialState,
   reducers: {
-    // setVisibel : (state, action) => {
-       
-    // }
+     setSingleData : (state, action) => {
+         state.singelData = state.askData.find((item) => item.id === action.payload)
+    }
   },
 });
 
-export const {setVisibel} = questionSlice.actions
+export const {setSingleData} = questionSlice.actions
 
 export default questionSlice.reducer
