@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMatched, setSingleData, setVisible } from "../store/DataSlice";
 import success from "../assets/success.mp3";
 import wah from "../assets/lose.mp3";
+import { FaSearch } from "react-icons/fa";
+import { BiSolidShow ,BiSolidHide} from "react-icons/bi";
+import AnimationHidden from "../components/AnimationHidden";
+
 function Question() {
   const { singelData, matched } = useSelector((state) => state.DataReducer);
   const [showAll, setShowAll] = useState(false);
@@ -22,73 +26,98 @@ function Question() {
       dispatch(setVisible(value));
       setTimeout(() => {
         dispatch(setMatched());
-      }, 1000);
+      }, 2000);
     }
     setValue("");
   };
 
   return (
-    <div className="flex flex-col w-full items-center bg-[color:var(--main-color)] text-white font-bold h-[100vh]">
-      <div className="flex gap-3 items-center justify-center mt-4">
-        {matched === true ? (
-          <audio src={success} autoPlay></audio>
-        ) : matched === false ? (
-          <audio src={wah} autoPlay></audio>
-        ) : null}
-        <input
-          className=" border-none outline-none text-black px-4 py-1 "
-          type="text"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
-        <button
-          className="flex items-center justify-center bg-slate-600 px-2 py-1"
-          onClick={handleClick}
-        >
-          Search
-        </button>
-        <button onClick={() => setShowAll(!showAll)}>Show All</button>
-      </div>
+    <div className="Container">
+        {matched === true ? (  <audio src={success} autoPlay></audio>) : matched === false ? (<audio src={wah} autoPlay></audio>) : null}
+      <header className="flex gap-3 items-center flex-col justify-center mt-4 max-w-[35rem]">
+      
+        <div className="mt-1 mb-2 text-2xl text-center">
+          {singelData && singelData.question}
+        </div>
+        <div className="search-content">
+          <div className="input-context">
+            <input
+              className=" border-none outline-none text-black px-4 py-1 "
+              type="text"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+            />
+            <button className=" bg-slate-400" onClick={handleClick}>
+              <FaSearch size={20} />
+            </button>
+          </div>
+          <button
+            className="  
+            show-answer-button active:translate-y-1 duration-200"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ?  <BiSolidHide size={20}  />:<BiSolidShow size={20} /> }
+            {showAll ? <span> Gizle</span> : <span>Göster</span>}
+          </button>
+        </div>
+      </header>
 
       {showAll ? (
-        <section className="flex flex-col w-full items-center bg-[color:var(--main-color)] text-white font-bold">
-        <header className="mt-10 text-2xl">
-            {singelData && singelData.question}
-          </header>
+        <section className=" flex flex-col w-full items-center justify-evenly ">
           <main className="flex flex-col items-center justify-center mt-10 gap-1">
             {singelData &&
               singelData.options &&
               singelData.options.map((option, i) => (
-                <div key={i} className="w-[25rem] flex  items-center justify-between text-xl  ">
-                    <span>{option.title}</span> <span> {option.score} PUAN </span>    
+                <div
+                  key={i}
+                  className="w-[32rem]  flex  items-center justify-between text-xl  "
+                >
+                  <span>{option.title}</span> <span> {option.score} PUAN </span>
                 </div>
               ))}
           </main>
-          <button>
-            <Link to={`/question/${Number(id) + 1}`}> Diğer Soruya Geç</Link>
-          </button>
+         
+            <Link
+              className="next-question-button text-center"
+              onClick={() => setShowAll(false)}
+              to={`/question/${Number(id) + 1}`}
+            >
+              {" "}
+              Diğer Soruya Geç
+            </Link>
+    
         </section>
       ) : (
-        <section className="flex flex-col w-full items-center bg-[color:var(--main-color)] text-white font-bold">
-          <header className=" mt-10 text-2xl">
-            {singelData && singelData.question}
-          </header>
+        <section className="flex flex-col w-full items-center">
           <main className="flex flex-col items-center justify-center mt-10 gap-1">
             {singelData &&
               singelData.options &&
               singelData.options.map((option, i) => (
-                <div key={i} className="w-[25rem] flex  items-center justify-between px-3  text-xl">
+                <div
+                  key={i}
+                  className="w-[32rem] flex  items-center justify-between px-3  text-xl"
+                >
                   {option.visibel ? (
                     <>
-                   <span> {option.title}</span>   <span> {option.score} PUAN </span>  
+                      <span> {option.title}</span>{" "}
+                      <span> {option.score} PUAN </span>
                     </>
                   ) : (
-                    <div className="w-[25rem] h-10  bg-slate-700 my-3 animate-pulse" />
+                    <AnimationHidden famouse={i}/>
                   )}
                 </div>
               ))}
-               {singelData &&
-              singelData.options &&   singelData.options.every((item) =>item.visibel === true) &&  <Link to={`/question/${Number(id) + 1}`}> Diğer Soruya Geç</Link> } 
+            {singelData &&
+              singelData.options &&
+              singelData.options.every((item) => item.visibel === true) && (
+                <button onClick={() => setShowAll(false)}>
+                  {" "}
+                  <Link to={`/question/${Number(id) + 1}`}>
+                    {" "}
+                    Diğer Soruya Geç
+                  </Link>
+                </button>
+              )}
           </main>
         </section>
       )}

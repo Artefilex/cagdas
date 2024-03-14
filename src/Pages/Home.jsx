@@ -12,10 +12,12 @@ function Home() {
     }, [askData,dispatch]);
     
 
-  return   <div className="flex flex-col w-full items-center bg-[color:var(--main-color)] text-white font-bold h-[100vh]">
-  Yarışmaya Hoş geldiniz
+  return   <div className="flex flex-col w-full  justify-center items-center bg-[color:var(--main-color)] text-white  h-[100vh]">
+       <div className="text-4xl font-bold">
+    Yarışmaya Hoş geldiniz
+    </div>
  
-      <Link to={`/question/1`}> İlk Soru Gelsin </Link>
+      <Link to={`/question/1`} className="bg-green-800 px-6 py-4 active:translate-y-2 rounded-full mt-10"> İlk Soruya ilerle </Link>
  
 </div>;
 }

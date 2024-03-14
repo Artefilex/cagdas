@@ -2,7 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --main-color: #000000;
-  
+:root {
+  --main-color: #f9f9f9;
+  --button-color: #16a34a;
+  --main-background: #000000;
+  --main-padding: 0.4rem 1rem;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: var(--main-background);
+  color: var(--main-color);
+  font-weight: 900;
+  min-height: 100vh;
+}
+
+.search-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 3rem;
+  width: 100%;
+}
+
+.search-content .input-context {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.search-content .input-context input {
+  width: 100%;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.search-content .input-context input {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  padding: var(--main-padding);
+}
+
+.search-content .input-context button {
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
+  padding: 0.57rem 1rem;
+}
+
+.search-content-button {
+  border: none;
+  outline: none;
+}
+
+.next-question-button {
+  padding: 1rem 4rem;
+  border-radius: 8px;
+  width: 25rem;
+  border: none;
+  outline: none;
+  background: var(--button-color);
+  margin-top: 3rem;
+}
+
+.show-answer-button {
+  width: 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--button-color);
+  padding: var(--main-padding);
+  border-radius: 8px;
+  border: none;
+  outline: none;
 }
