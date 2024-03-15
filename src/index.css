@@ -65,7 +65,7 @@
   border: none;
   outline: none;
   background: var(--button-color);
-  margin-top: 3rem;
+  /* margin-top: 3rem;  */
 }
 
 .show-answer-button {
