@@ -32,9 +32,10 @@ function Question() {
   };
 
   return (
-    <div className="Container">
+   <div className="flex  w-full h-full items-center justify-center bg-[color:var(--main-background)]">
+     <div className="Container">
         {matched === true ? (  <audio src={success} autoPlay></audio>) : matched === false ? (<audio src={wah} autoPlay></audio>) : null}
-      <header className="flex gap-3 items-center flex-col justify-center mt-4 max-w-[35rem]">
+      <header className="flex gap-3 items-center flex-col justify-center mt-4 max-w-[35rem] w-full px-2">
       
         <div className="mt-1 mb-2 text-2xl text-center">
           {singelData && singelData.question}
@@ -47,13 +48,12 @@ function Question() {
               value={value}
               onChange={(e) => setValue(e.target.value)}
             />
-            <button className=" bg-slate-400" onClick={handleClick}>
+            <button className=" bg-slate-700" onClick={handleClick}>
               <FaSearch size={20} />
             </button>
           </div>
           <button
-            className="  
-            show-answer-button active:translate-y-1 duration-200"
+            className=" show-answer-button active:translate-y-1 duration-200"
             onClick={() => setShowAll(!showAll)}
           >
             {showAll ?  <BiSolidHide size={20}  />:<BiSolidShow size={20} /> }
@@ -63,14 +63,14 @@ function Question() {
       </header>
 
       {showAll ? (
-        <section className=" flex flex-col w-full items-center justify-evenly ">
-          <main className="flex flex-col items-center justify-center mt-10 gap-1">
+        <section className="flex flex-col w-full items-center justify-evenly font-semibold">
+          <main className="flex w-[90%] flex-col items-center justify-center  mt-2 gap-1">
             {singelData &&
               singelData.options &&
               singelData.options.map((option, i) => (
                 <div
                   key={i}
-                  className="w-[32rem]  flex  items-center justify-between text-xl  "
+                  className="w-full max-w-[32rem] flex items-center justify-between text-xl gap-2 my-2 "
                 >
                   <span>{option.title}</span> <span> {option.score} PUAN </span>
                 </div>
@@ -89,13 +89,13 @@ function Question() {
         </section>
       ) : (
         <section className="flex flex-col w-full items-center">
-          <main className="flex flex-col items-center justify-center mt-10 gap-1">
+          <main className="flex flex-col w-[90%] items-center justify-center mt-2 gap-1 font-semibold">
             {singelData &&
               singelData.options &&
               singelData.options.map((option, i) => (
                 <div
                   key={i}
-                  className="w-[32rem] flex  items-center justify-between px-3  text-xl"
+                  className="w-full max-w-[32rem] flex  items-center justify-between px-3 text-xl gap-2"
                 >
                   {option.visibel ? (
                     <>
@@ -110,10 +110,11 @@ function Question() {
             {singelData &&
               singelData.options &&
               singelData.options.every((item) => item.visibel === true) && (
-                <button onClick={() => setShowAll(false)}>
-                  {" "}
+                <button
+                className="next-question-button text-center"
+                onClick={() => setShowAll(false)}>
+                
                   <Link to={`/question/${Number(id) + 1}`}>
-                    {" "}
                     Diğer Soruya Geç
                   </Link>
                 </button>
@@ -122,6 +123,10 @@ function Question() {
         </section>
       )}
     </div>
+
+
+   </div>
+
   );
 }
 

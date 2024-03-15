@@ -12,8 +12,8 @@ function Home() {
     }, [askData,dispatch]);
     
 
-  return   <div className="flex flex-col w-full  justify-center items-center bg-[color:var(--main-color)] text-white  h-[100vh]">
-       <div className="text-4xl font-bold">
+  return   <div className="font-sans flex flex-col w-full  justify-center items-center bg-[color:var(--main-color)] text-white  min-h-[100vh]">
+       <div className="text-4xl font-bold text-black">
     Yarışmaya Hoş geldiniz
     </div>
  
