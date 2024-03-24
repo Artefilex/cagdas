@@ -1,5 +1,5 @@
 import HeaderScore from "./HeaderScore";
-import logo from "../assets/logo.jpeg";
+
 import { useDispatch, useSelector } from "react-redux";
 import { setScoreA, setScoreB } from "../store/DataSlice";
 import { useState } from "react";
@@ -23,7 +23,7 @@ function ScoreTabel() {
 
   return (
     <>
-      <div className="text-white flex flex-col items-start justify-start h-full  max-w-[30rem] w-[80%]   mt-[4%] gap-5">
+      <div className="text-white flex flex-col items-center justify-start  max-w-[31rem] w-[80%]  mt-[4%] gap-5 absolute bg-slate-800 z-20 px-4 h-[25rem] rounded-md  shadow shadow-slate-600 py-2">
         <h1 className="text-2xl font-bold text-center w-full">Score Durumu</h1>
         <div className=" w-full h-[2px] bg-white pl-1" />
         <div className="flex w-full items-start justify-between ">
@@ -39,7 +39,7 @@ function ScoreTabel() {
                 }}
             
               />
-              <button className=" bg-slate-800 mr-2 p-2 rounded" type="submit"><HiOutlinePlus  size={20}/> </button>
+              <button className="rounded bg-slate-950 p-2 hover:bg-slate-900 mr-2" type="submit"><HiOutlinePlus  size={20}/> </button>
             </form>
           </div>
 
@@ -48,23 +48,19 @@ function ScoreTabel() {
             <HeaderScore title="B takımı" score={scoreB} />
             <form onSubmit={handelSubbmitB} className="relative top-20 flex">
               <input
-                className="bg-transparent outline-none border-b-2 border-white"
+                className="bg-transparent outline-none border-b-2 border-white ml-4 "
                 type="number"
                 value={scoreBSetter}
                 onChange={(e) => {
                   setScoreBSetter(e.target.value);
                 }}
               />
-              <button className="rounded bg-slate-800 p-2" type="submit"><HiOutlinePlus  size={20} /> </button>
+              <button className="rounded bg-slate-950 p-2 hover:bg-slate-900" type="submit"><HiOutlinePlus  size={20} /> </button>
             </form>
           </div>
         </div>
       </div>
-      <img
-        src={logo}
-        alt="logo"
-        className="absolute bottom-0 right-0 w-[30rem]"
-      />
+      
     </>
   );
 }

@@ -7,12 +7,12 @@ import { BiSolidShow, BiSolidHide } from "react-icons/bi";
 import AnimationHidden from "../components/AnimationHidden";
 import AnswerEffect from "../components/AnswerEffect";
 import ScoreTabel from "../components/ScoreTabel";
-
+import logo from "../assets/logo.jpeg";
 function Question() {
   const { singelData } = useSelector((state) => state.DataReducer);
   const [showAll, setShowAll] = useState(false);
   const [value, setValue] = useState("");
-
+ const [scoreShow , setScoreShow] = useState(true)
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -32,8 +32,9 @@ function Question() {
   };
 
   return (
-    <div className="flex  w-full h-full items-start justify-around bg-[color:var(--main-background)]">
-       
+    <div className="flex  w-full flex-col items-center justify-around bg-[color:var(--main-background)] ">
+    
+      { scoreShow ? <ScoreTabel/> : null}
       <div className="Container">
         <AnswerEffect />
         <header className="flex gap-3 items-center flex-col justify-center mt-4 max-w-[35rem] w-full px-2">
@@ -48,12 +49,12 @@ function Question() {
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
               />
-              <button type="submit" className=" bg-slate-700" onClick={handleClick}>
+              <button type="submit" className=" bg-slate-700 hover:bg-slate-800  transition-colors duration-200" onClick={handleClick}>
                 <FaSearch size={20} />
               </button>
             </form>
             <button
-              className=" show-answer-button active:translate-y-1 duration-200"
+              className=" show-answer-button active:translate-y-1  transition-colors hover:bg-green-500 duration-200"
               onClick={() => setShowAll(!showAll)}
             >
               {showAll ? <BiSolidHide size={20} /> : <BiSolidShow size={20} />}
@@ -104,16 +105,23 @@ function Question() {
           </section>
         )}
 
-        <Link
-          className="next-question-button text-center"
+       <div className="flex items-center justify-between w-full  max-w-[30rem] "> 
+       <Link
+          className="next-question-button text-center bg-[color:var(--button-color)] hover:bg-green-500 transition-colors duration-200"
           onClick={() => setShowAll(false)}
           to={`/question/${Number(id) + 1}`}
         >
           {" "}
           Diğer Soruya Geç{" "}
         </Link>
+        <button className="next-question-button text-center bg-blue-600 hover:bg-blue-500  transition-colors duration-200"  onClick={()=>setScoreShow(!scoreShow)} >Score Tablosu</button>
+       </div>
       </div>
-      <ScoreTabel/>
+      <img
+        src={logo}
+        alt="logo"
+        className="absolute bottom-1 left-1 w-[20rem]"
+      />
     </div>
   );
 }
