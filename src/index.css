@@ -35,9 +35,10 @@ input[type=number] {
 .search-content {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   gap: 3rem;
   width: 100%;
+
 }
 
 .search-content .input-context {
@@ -45,6 +46,7 @@ input[type=number] {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+
 }
 .search-content .input-context input {
   width: 100%;
@@ -91,6 +93,7 @@ input[type=number] {
 
 @media screen and (min-width: 600px) {
   .search-content{
-    width: 90%;
+    width: 100%;
+    max-width: 31rem;
   }
 }

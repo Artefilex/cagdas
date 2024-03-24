@@ -12,12 +12,12 @@ function Question() {
   const { singelData } = useSelector((state) => state.DataReducer);
   const [showAll, setShowAll] = useState(false);
   const [value, setValue] = useState("");
- const [scoreShow , setScoreShow] = useState(true)
+ const [scoreShow , setScoreShow] = useState(false)
   const { id } = useParams();
   const dispatch = useDispatch();
-
+console.log(id)
   useEffect(() => {
-    dispatch(setSingleData(Number(id) + 1));
+    dispatch(setSingleData(Number(id)));
   }, [id, dispatch]);
 
   const handleClick = (e) => {
@@ -37,11 +37,12 @@ function Question() {
       { scoreShow ? <ScoreTabel/> : null}
       <div className="Container">
         <AnswerEffect />
+        { Number(id)  < 8 ? 
         <header className="flex gap-3 items-center flex-col justify-center mt-4 max-w-[35rem] w-full px-2">
           <div className="mt-1 mb-2 text-2xl text-center">
             {singelData && singelData.question}
           </div>
-          <div className="search-content">
+          <div className="search-content ">
             <form className="input-context">
               <input
                 className=" border-none outline-none text-black px-4 py-1 "
@@ -61,8 +62,8 @@ function Question() {
               {showAll ? <span> Gizle</span> : <span>Göster</span>}
             </button>
           </div>
-        </header>
-
+        </header> : ""
+          }
         {showAll ? (
           <section className="flex flex-col w-full items-center justify-evenly font-semibold">
             <main className="flex w-[90%] flex-col items-center justify-center  mt-2 ">
@@ -105,24 +106,36 @@ function Question() {
           </section>
         )}
 
-       <div className="flex items-center justify-between w-full  max-w-[30rem] "> 
-       <Link
-          className="next-question-button text-center bg-[color:var(--button-color)] hover:bg-green-500 transition-colors duration-200"
+       <div className="flex items-center justify-between w-full gap-3  max-w-[32rem] "> 
+    
+    { Number(id)  < 8 ?   <Link
+          className="next-question-button text-center bg-[color:var(--button-color)] hover:bg-green-500 transition-colors duration-200 w-full"
           onClick={() => setShowAll(false)}
           to={`/question/${Number(id) + 1}`}
+          
         >
           {" "}
           Diğer Soruya Geç{" "}
-        </Link>
-        <button className="next-question-button text-center bg-blue-600 hover:bg-blue-500  transition-colors duration-200"  onClick={()=>setScoreShow(!scoreShow)} >Score Tablosu</button>
+        </Link> : null
+
+    }
+      
+        <button className="next-question-button text-center bg-blue-600 hover:bg-blue-500  transition-colors duration-200 w-full"  onClick={()=>setScoreShow(!scoreShow)} >Score Tablosu</button>
        </div>
       </div>
-      <img
+      { Number(id) === 8 ? <img
         src={logo}
         alt="logo"
-        className="absolute bottom-1 left-1 w-[20rem]"
+        className="absolute bottom-5  w-[20rem]"
       />
-    </div>
+    : <img
+    src={logo}
+    alt="logo"
+    className="absolute bottom-1 left-1 w-[20rem]"
+  />
+}
+</div>
+      
   );
 }
 
