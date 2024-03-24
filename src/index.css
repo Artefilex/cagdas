@@ -9,6 +9,17 @@
   --main-padding: 0.4rem 1rem;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .Container {
   display: flex;
   flex-direction: column;
@@ -60,7 +71,7 @@
 .next-question-button {
   padding: 1rem 4rem;
   border-radius: 8px;
-  max-width: 25rem;
+  max-width: 30rem;
   width: 95%;
   border: none;
   outline: none;
