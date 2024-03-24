@@ -6,6 +6,7 @@ import { FaSearch } from "react-icons/fa";
 import { BiSolidShow, BiSolidHide } from "react-icons/bi";
 import AnimationHidden from "../components/AnimationHidden";
 import AnswerEffect from "../components/AnswerEffect";
+import ScoreTabel from "../components/ScoreTabel";
 
 function Question() {
   const { singelData } = useSelector((state) => state.DataReducer);
@@ -31,7 +32,8 @@ function Question() {
   };
 
   return (
-    <div className="flex  w-full h-full items-center justify-center bg-[color:var(--main-background)]">
+    <div className="flex  w-full h-full items-start justify-around bg-[color:var(--main-background)]">
+       
       <div className="Container">
         <AnswerEffect />
         <header className="flex gap-3 items-center flex-col justify-center mt-4 max-w-[35rem] w-full px-2">
@@ -39,17 +41,17 @@ function Question() {
             {singelData && singelData.question}
           </div>
           <div className="search-content">
-            <div className="input-context">
+            <form className="input-context">
               <input
                 className=" border-none outline-none text-black px-4 py-1 "
                 type="text"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
               />
-              <button className=" bg-slate-700" onClick={handleClick}>
+              <button type="submit" className=" bg-slate-700" onClick={handleClick}>
                 <FaSearch size={20} />
               </button>
-            </div>
+            </form>
             <button
               className=" show-answer-button active:translate-y-1 duration-200"
               onClick={() => setShowAll(!showAll)}
@@ -111,6 +113,7 @@ function Question() {
           Diğer Soruya Geç{" "}
         </Link>
       </div>
+      <ScoreTabel/>
     </div>
   );
 }

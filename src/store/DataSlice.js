@@ -5,6 +5,8 @@ const initialState = {
   askData: Ask_Data,
   singelData: null,
   matched: null,
+  scoreA: 0,
+  scoreB:0
 };
 
 const questionSlice = createSlice({
@@ -45,10 +47,16 @@ const questionSlice = createSlice({
     },
     setMatched : (state) => {
       state.matched = null
+    },
+    setScoreA: (state,action) => {
+      state.scoreA += action.payload
+    },
+    setScoreB: (state,action) => {
+      state.scoreB += action.payload
     }
   },
 });
 
-export const { setSingleData, setVisible ,setMatched } = questionSlice.actions;
+export const { setSingleData, setVisible ,setMatched,setScoreA ,setScoreB } = questionSlice.actions;
 
 export default questionSlice.reducer;
